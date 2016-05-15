@@ -1,0 +1,23 @@
+{
+  "name": "hirsi_simple",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp default"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jarhells/Hirsi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jarhells/Hirsi/issues"
+  },
+  "homepage": "https://github.com/jarhells/Hirsi#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-connect": "^4.0.0"
+  }
+}
