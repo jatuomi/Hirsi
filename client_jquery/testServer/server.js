@@ -6,13 +6,7 @@ app.use(express.static('../app'));
 
 var theWord = 'SALASANA';
 
-var server = app.listen(9000, function () 
-{
-  var host = server.address().address
-  var port = server.address().port
-
-  console.log("Example app listening at http://%s:%s", host, port)
-})
+var server = app.listen(9000);
 
 app.get('/HirsiServer_JAX-RS/services/words/getWord', function (req, res)
 {
