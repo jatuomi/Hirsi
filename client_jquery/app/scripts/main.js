@@ -2,7 +2,7 @@
 
 $( document ).ready(function() {
 
-	var serviceRoot = 'http://localhost:8080/HirsiServer_JAX-RS/services/words/'
+	var serviceRoot = 'http://localhost:9000/HirsiServer_JAX-RS/services/words/'
 	var alphapets = 'ABCDEFGHIJKLMNOPQRSTUVXYZÅÄÖ'.split('');
 
 	var maxErrors = 6;
