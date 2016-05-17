@@ -44,52 +44,32 @@ $( document ).ready(function() {
 		button.click((function(btn, letter){
 			return function()
 			{
-				$.getJSON({
-			        url: serviceRoot + 'letterInWord/' + wordId,
-			        data: {'letter':letter}
-			    }).then(function(data) 
-			    {
-			    	var indexes = [];
-
-					$.each( data, function( key, val ) {
-						indexes.push(key);
-					});
-
-					if( indexes.length > 0 )
-					{
-						btn.css('color','green');
-
-						for (var i = 0; i < indexes.length; i++) 
-						{
-							$('#hiddenLetter' + indexes[i]).text(' ' + letter + ' ');
-							$('#hiddenLetter' + indexes[i]).attr('data-hidden', false);
-						}
-
-						if( $('.hiddenLetter[data-hidden=true]').length == 0 )
-						{
-							gameFinished(true);
-						}
-					}
-					else
-					{
-						btn.css('color','red');
-						errorCount++;
-
-						if( errorCount > maxErrors )
-						{
-							gameFinished(false);
-						}
-
-					}
-
-			    });
-
-				btn.attr('disabled', true);
+				checkLetter(btn, letter);
 			}
 		})(button, alphapets[i]));
 
 		$('#inputLetters').append(button);
 	}
+
+	$( "body" ).keydown(function(e) {
+  	var letter = String.fromCharCode(e.keyCode);
+
+  	if (e.keyCode === 221) {
+  		letter = 'Å';
+  	}
+  	if (e.keyCode === 222) {
+  		letter = 'Ä';
+  	}
+  	if (e.keyCode === 192) {
+  		letter = 'Ö';
+  	}
+
+  	var btn = $("#letter"+letter);
+
+  	if (btn.prop('disabled')) {return;}
+
+  	checkLetter(btn, letter);
+	});
 
 
 	function gameStarted()
@@ -150,5 +130,50 @@ $( document ).ready(function() {
 		}
 
 		return '' + seconds + " s."
+	}
+
+	function checkLetter(btn, letter)
+	{
+		$.getJSON({
+			        url: serviceRoot + 'letterInWord/' + wordId,
+			        data: {'letter':letter}
+			    }).then(function(data) 
+			    {
+			    	var indexes = [];
+
+					$.each( data, function( key, val ) {
+						indexes.push(key);
+					});
+
+					if( indexes.length > 0 )
+					{
+						btn.css('color','green');
+
+						for (var i = 0; i < indexes.length; i++) 
+						{
+							$('#hiddenLetter' + indexes[i]).text(' ' + letter + ' ');
+							$('#hiddenLetter' + indexes[i]).attr('data-hidden', false);
+						}
+
+						if( $('.hiddenLetter[data-hidden=true]').length == 0 )
+						{
+							gameFinished(true);
+						}
+					}
+					else
+					{
+						btn.css('color','red');
+						errorCount++;
+
+						if( errorCount > maxErrors )
+						{
+							gameFinished(false);
+						}
+
+					}
+
+			    });
+
+		btn.attr('disabled', true);
 	}
 });
